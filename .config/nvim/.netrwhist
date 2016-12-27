@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/edys/chen354/programming-languages/mysql'
+let g:netrw_dirhist_2='/Users/edys/chen354/programming-languages'
+let g:netrw_dirhist_3='/Users/edys/hammond348'
+let g:netrw_dirhist_4='/Users/edys/hammond348/__pycache__'
+let g:netrw_dirhist_5='/Users/edys/programming/full-stack-redux/voting-server/src'
+let g:netrw_dirhist_6='/Users/edys/programming/easy_hard_tsp.py'
