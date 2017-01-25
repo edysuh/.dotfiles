@@ -6,33 +6,38 @@
 set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 " ---- dein begin ----
-call dein#begin('~/.vim/dein/')
-call dein#add('shougo/dein.vim')
+if dein#load_state('~/.vim/dein')
+	call dein#begin('~/.vim/dein/')
+  call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 
-" general vim as an ide plugins
-call dein#add('airblade/vim-gitgutter')
-call dein#add('ctrlpvim/ctrlp.vim')
-call dein#add('dyng/ctrlsf.vim')
-call dein#add('neomake/neomake')
-call dein#add('raimondi/delimitmate')
-call dein#add('scrooloose/nerdtree')
-call dein#add('shougo/deoplete.nvim')
-call dein#add('tpope/vim-commentary')
-call dein#add('tpope/vim-fugitive')
-call dein#add('tpope/vim-surround')
-call dein#add('xolox/vim-misc')
-call dein#add('xolox/vim-session')
+	" general vim as an ide plugins
+	call dein#add('airblade/vim-gitgutter')
+	call dein#add('ctrlpvim/ctrlp.vim')
+	call dein#add('dyng/ctrlsf.vim')
+	call dein#add('neomake/neomake')
+	call dein#add('raimondi/delimitmate')
+	call dein#add('scrooloose/nerdtree')
+	call dein#add('shougo/deoplete.nvim')
+	call dein#add('tpope/vim-commentary')
+	call dein#add('tpope/vim-fugitive')
+	call dein#add('tpope/vim-surround')
+	call dein#add('xolox/vim-misc')
+	call dein#add('xolox/vim-session')
+	call dein#add('rstacruz/sparkup')
 
-" themes
-call dein#add('freeo/vim-kalisi')
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
+	" themes
+	call dein#add('freeo/vim-kalisi')
+	call dein#add('vim-airline/vim-airline')
+	call dein#add('vim-airline/vim-airline-themes')
 
-" language specific plugins
-call dein#add('pangloss/vim-javascript')
-call dein#add('carlitux/deoplete-ternjs')
+	" language specific plugins
+	call dein#add('pangloss/vim-javascript')
+	call dein#add('carlitux/deoplete-ternjs')
+	call dein#add('mxw/vim-jsx')
 
-call dein#end()
+	call dein#end()
+  call dein#save_state()
+endif
 " ---- dein end ----
 
 filetype plugin indent on
@@ -159,6 +164,7 @@ let delimitMate_expand_cr = 1
 
 " ---- ctrlp ----
 let g:ctrlp_open_multiple_files = 'ij'
+let g:ctrlp_clear_cache_on_exit = '0'
 
 " ---- deoplete ----
 let g:deoplete#enable_at_startup = 1
@@ -176,7 +182,7 @@ let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'
 
 " ---- neomake ----
-autocmd! BufWritePost,BufEnter * Neomake											" run neomake on every write
+autocmd! BufWritePost,BufEnter * Neomake						" run neomake on every write
 autocmd! VimLeave * let g:neomake_verbose = 0				" no exit code on close
 let g:neomake_javascript_enabled_makers = ['jshint']
 let g:neomake_python_enabled_makers = ['flake8']
