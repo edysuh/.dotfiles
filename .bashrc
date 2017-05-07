@@ -23,6 +23,10 @@ bind TAB:menu-complete
 bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 
+# set editor
+export EDITOR="nvim"
+export VISUAL="nvim"
+
 # git info in input line
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -30,6 +34,9 @@ parse_git_branch() {
 
 # fzf key bindings
 source ~/.fzf.bash
+
+# go export
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 # terminal input line
 export PS1=" \[\033[32m\]\u@\h\[\033[33m\] \[\033[36m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "

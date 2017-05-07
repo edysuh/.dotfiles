@@ -3,41 +3,53 @@
 
 " dein scripts ---------------------------------------------------------------
 
+" to install dein:
+" curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+" sh ./installer.sh {specify the installation directory (~/.vim/dein/)}
+
 set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 " ---- dein begin ----
-if dein#load_state('~/.vim/dein')
-	call dein#begin('~/.vim/dein/')
-  call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
+call dein#begin('~/.vim/dein/')
+call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 
-	" general vim as an ide plugins
-	call dein#add('airblade/vim-gitgutter')
-	call dein#add('ctrlpvim/ctrlp.vim')
-	call dein#add('dyng/ctrlsf.vim')
-	call dein#add('neomake/neomake')
-	call dein#add('raimondi/delimitmate')
-	call dein#add('scrooloose/nerdtree')
-	call dein#add('shougo/deoplete.nvim')
-	call dein#add('tpope/vim-commentary')
-	call dein#add('tpope/vim-fugitive')
-	call dein#add('tpope/vim-surround')
-	call dein#add('xolox/vim-misc')
-	call dein#add('xolox/vim-session')
-	call dein#add('rstacruz/sparkup')
+" general vim as an ide plugins
+call dein#add('airblade/vim-gitgutter')
+call dein#add('ctrlpvim/ctrlp.vim')
+call dein#add('dyng/ctrlsf.vim')
+" call dein#add('ludovicchabant/vim-gutentags')
+call dein#add('matze/vim-move')
+call dein#add('neomake/neomake')
+call dein#add('raimondi/delimitmate')
+call dein#add('rstacruz/sparkup')
+" call dein#add('scrooloose/nerdtree')
+call dein#add('shougo/deoplete.nvim')
+call dein#add('tpope/vim-commentary')
+call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-surround')
+call dein#add('gregsexton/matchtag')
+call dein#add('xolox/vim-misc')
+call dein#add('xolox/vim-session')
+call dein#add('pboettch/vim-highlight-cursor-words')
+" call dein#add('hotoo/highlight-cursor-word.vim')
 
-	" themes
-	call dein#add('freeo/vim-kalisi')
-	call dein#add('vim-airline/vim-airline')
-	call dein#add('vim-airline/vim-airline-themes')
+" themes
+call dein#add('freeo/vim-kalisi')
+call dein#add('rakr/vim-one')
+call dein#add('chriskempson/base16-vim')
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
+call dein#add('jaxbot/semantic-highlight.vim')
 
-	" language specific plugins
-	call dein#add('pangloss/vim-javascript')
-	call dein#add('carlitux/deoplete-ternjs')
-	call dein#add('mxw/vim-jsx')
+" language specific plugins
+call dein#add('pangloss/vim-javascript')
+call dein#add('carlitux/deoplete-ternjs')
+call dein#add('ternjs/tern_for_vim')
+call dein#add('mxw/vim-jsx')
+call dein#add('octol/vim-cpp-enhanced-highlight')
 
-	call dein#end()
-  call dein#save_state()
-endif
+call dein#end()
+call dein#save_state()
 " ---- dein end ----
 
 filetype plugin indent on
@@ -63,6 +75,15 @@ set laststatus=2
 set confirm
 set hidden
 
+set mouse=a
+
+au FileType javascript set tabstop=2 | set softtabstop=2 | set shiftwidth=2
+au FileType python set tabstop=4 | set softtabstop=4 | set shiftwidth=4
+au FileType c set tabstop=4 | set softtabstop=4 | set shiftwidth=4
+au FileType cpp set tabstop=4 | set softtabstop=4 | set shiftwidth=4
+au FileType java set tabstop=4 | set softtabstop=4 | set shiftwidth=4
+au FileType go set tabstop=4 | set softtabstop=4 | set shiftwidth=4
+
 " custom mappings ------------------------------------------------------------
 
 let mapleader = "\<space>"
@@ -80,6 +101,10 @@ nnoremap <c-y> 4<c-y>
 
 vnoremap > >gv					" Do not loose the current selection when shift indentation
 vnoremap <lt> <lt>gv
+
+" remap ctrlp re-cache and buffer search
+map <c-c> :CtrlPClearCache<cr>
+map <c-f> :CtrlPBuffer<cr>
 
 " remap commentary
 vmap <leader>k gc
@@ -118,9 +143,11 @@ nnoremap <leader>n :tabprevious<CR>
 nnoremap <leader>b :tabnext<CR>
 
 " buffer navigation
-nnoremap <c-b> :bprevious<CR>
-nnoremap <c-n> :bnext<CR> 
-nnoremap <c-q> :bd<CR>
+" nnoremap <c-b> :bprevious<CR>
+" nnoremap <c-n> :bnext<CR> 
+nnoremap <c-b> <Nop>
+nnoremap <c-n> <Nop>
+nnoremap <c-q> :bp\|bd #<CR>
 
 " vim-session
 nnoremap <leader>s :SaveSession 
@@ -133,10 +160,9 @@ nnoremap <leader>d :NERDTreeToggle<CR>
 nmap     <leader>f <Plug>CtrlSFPrompt
 vmap     <leader>f <Plug>CtrlSFVwordPath
 nmap     <leader>F <Plug>CtrlSFCwordPath
-nmap     <leader>g <Plug>CtrlSFQuickfixPrompt
-vmap     <leader>g <Plug>CtrlSFQuickfixVwordPath
-vmap     <leader>G <Plug>CtrlSFQuickfixVwordExec
-nnoremap <leader>v :CtrlSFToggle<CR>
+" nmap     <c-/> <Plug>CtrlSFPrompt
+" vmap     <c-/> <Plug>CtrlSFVwordPath
+" nmap     <c-?> <Plug>CtrlSFCwordPath
 
 " neovim terminal escape
 tnoremap \<Esc> <C-\><C-n>
@@ -164,11 +190,17 @@ let delimitMate_expand_cr = 1
 
 " ---- ctrlp ----
 let g:ctrlp_open_multiple_files = 'ij'
-let g:ctrlp_clear_cache_on_exit = '0'
+" let g:ctrlp_clear_cache_on_exit = '0'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_prompt_mappings = {
+    \ 'PrtClearCache()':      ['<c-c>'],
+    \ }
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 
 " ---- deoplete ----
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#source#attribute#min_pattern_length = 2
+let g:deoplete#source#attribute#min_pattern_length = 1
 call deoplete#custom#set("_", 'converters',
 													\ [' converter_remove_paren'])
 
@@ -184,11 +216,19 @@ let g:tern_show_signature_in_pum = '0'
 " ---- neomake ----
 autocmd! BufWritePost,BufEnter * Neomake						" run neomake on every write
 autocmd! VimLeave * let g:neomake_verbose = 0				" no exit code on close
+let g:neomake_highlight_columns = 0
 let g:neomake_javascript_enabled_makers = ['jshint']
 let g:neomake_python_enabled_makers = ['flake8']
+let g:neomake_html_enabled_makers = []
 let g:neomake_python_flake8_make = {
 	\ 'exe': ['python3']
 	\ }
+augroup my_neomake_signs
+	au!
+	autocmd ColorScheme *
+			\ hi NeomakeErrorSign ctermfg=white |
+			\ hi NeomakeWarningSign ctermfg=yellow
+augroup END
 
 " ---- vim-session ----
 let g:session_autosave = 'no'
@@ -199,6 +239,23 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " ---- ctrlsf ----
 let g:ctrlsf_position = 'bottom'
+let g:ctrlsf_ignore_dir = ['./tags']
+
+" ---- gutentags ----
+" let g:gutentags_cache_dir = '~/.cache/ctags'
+
+" ---- sparkup ----
+autocmd FileType javascript,jsx,ejs runtime! ftplugin/html/sparkup.vim
+
+" ---- vim-move ----
+" let g:move_key_modifier = "A"
+
+" ---- matchtag ----
+" autocmd FileType javascript,jsx runtime! ftplugin/html.vim
+
+" ---- semantic highlighting ----
+
+" let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
 
 " neovim terminal emulator configurations ------------------------------------
 
@@ -207,6 +264,8 @@ autocmd BufLeave term://* stopinsert
 
 " themes and customization ---------------------------------------------------
 
+set termguicolors
+
 " ---- vim-airline ----
 let g:airline_powerline_fonts = 1
 " let g:airline_section_y = ''
@@ -214,10 +273,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 set ttimeoutlen=0
 set noshowmode
-let g:airline_theme='kalisi'
+" let g:airline_theme='kalisi'
 
 " ---- colorscheme ----
-colorscheme kalisi
+colorscheme one
 set background=dark
 
 " neovim terminal cursor color

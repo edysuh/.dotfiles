@@ -24,9 +24,10 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('ctrlpvim/ctrlp.vim')
 
 " themes
-call dein#add('freeo/vim-kalisi')
+" call dein#add('freeo/vim-kalisi')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
+call dein#add('jaxbot/semantic-highlight.vim')
 
 " language specific plugins
 call dein#add('pangloss/vim-javascript')
@@ -57,6 +58,7 @@ set laststatus=2
 set confirm
 set hidden
 set mouse=a
+set backspace=indent,eol,start
 
 " custom mappings ------------------------------------------------------------
 
@@ -179,7 +181,7 @@ set noshowmode
 let g:airline_theme='kalisi'
 
 " ---- colorscheme ----
-colorscheme kalisi
+" colorscheme kalisi
 set background=dark
 
 let g:dein#install_process_timeout = 240
