@@ -94,12 +94,17 @@ nnoremap <Leader>r :source $HOME/.config/nvim/init.vim<CR>
 nnoremap j gj
 nnoremap k gk
 
-nnoremap K kJ						" use K to join line above, similar to J
+" use K to join line above, similar to J
+nnoremap K kJ
 
-nnoremap <c-e> 4<c-e>		" scroll three lines with ctrl-e and ctrl-y
+" scroll three lines with ctrl-e and ctrl-y
+nnoremap <c-e> 4<c-e>j
 nnoremap <c-y> 4<c-y>
+nnoremap <c-j> 4<c-e>
+nnoremap <c-k> 4<c-y>
 
-vnoremap > >gv					" Do not loose the current selection when shift indentation
+" Do not loose the current selection when shift indentation
+vnoremap > >gv
 vnoremap <lt> <lt>gv
 
 " remap ctrlp re-cache and buffer search
@@ -118,8 +123,8 @@ nnoremap O Ox<BS>
 nmap <silent> <BS> :nohlsearch<CR>
 
 " same screen buffer focus 
-nnoremap <c-j> <C-W>j
-nnoremap <c-k> <C-W>k
+" nnoremap <c-j> <C-W>j
+" nnoremap <c-k> <C-W>k
 nnoremap <c-h> <C-W>h
 nnoremap <c-l> <C-W>l
 
@@ -168,12 +173,12 @@ nmap     <leader>F <Plug>CtrlSFCwordPath
 tnoremap \<Esc> <C-\><C-n>
 
 " terminal buffer movement
-tnoremap <c-j> <C-\><C-n><C-W>j
-tnoremap <c-k> <C-\><C-n><C-W>k
-tnoremap <c-h> <C-\><C-n><C-W>h
-tnoremap <c-l> <C-\><C-n><C-W>l
+tnoremap <c-W>j <C-\><C-n><C-W>j
+tnoremap <c-W>k <C-\><C-n><C-W>k
+tnoremap <c-W>h <C-\><C-n><C-W>h
+tnoremap <c-W>l <C-\><C-n><C-W>l
 
-" buffer navigation
+" terminal buffer navigation
 tnoremap <c-b> <C-\><C-n>:bprevious<CR>
 tnoremap <c-n> <C-\><C-n>:bnext<CR>
 tnoremap <c-q> <C-\><C-n>:bd<CR>
