@@ -11,7 +11,7 @@ alias sl='ls'
 alias ll='ls -l'
 alias la='ls -A'
 alias lal='ls -Al'
-alias C='clear'
+# alias C='clear'
 
 alias bashrc='nvim ~/.bashrc'
 alias vimrc='vim ~/.vimrc'
@@ -38,5 +38,9 @@ source ~/.fzf.bash
 # go export
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
+# racket export
+export PATH=$PATH:/Applications/Racket\ v6.10.0.3/bin
+
 # terminal input line
 export PS1=" \[\033[32m\]\u@\h\[\033[33m\] \[\033[36m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+# export PS1=" \[\033[34m\]\D{%D %r} \[\033[32m\]\u@\h\[\033[33m\] \[\033[36m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
