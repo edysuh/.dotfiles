@@ -19,10 +19,8 @@ call dein#add('airblade/vim-gitgutter')
 call dein#add('chaoren/vim-wordmotion')
 call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('dyng/ctrlsf.vim')
-" call dein#add('justinmk/vim-sneak')
 call dein#add('gregsexton/matchtag')
 call dein#add('junegunn/vim-easy-align')
-" call dein#add('matze/vim-move')
 call dein#add('neomake/neomake')
 call dein#add('rhysd/clever-f.vim')
 call dein#add('raimondi/delimitmate')
@@ -33,22 +31,14 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-repeat')
 call dein#add('tpope/vim-surround')
 call dein#add('unblevable/quick-scope')
+call dein#add('vim-airline/vim-airline')
 call dein#add('xolox/vim-misc')
-" call dein#add('rstacruz/sparkup')
-" call dein#add('xolox/vim-session')
-" call dein#add('ludovicchabant/vim-gutentags')
-" call dein#add('scrooloose/nerdtree')
-" call dein#add('takac/vim-hardtime')
 
 " themes
 call dein#add('freeo/vim-kalisi')
 call dein#add('rakr/vim-one')
-call dein#add('morhetz/gruvbox')
 call dein#add('icymind/neosolarized')
-call dein#add('chriskempson/base16-vim')
-call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
-" call dein#add('jaxbot/semantic-highlight.vim')
 
 " language specific plugins
 call dein#add('pangloss/vim-javascript')
@@ -76,7 +66,6 @@ set shiftwidth=2
 set number              " show line numbers
 set showcmd             " show command in bottom bar
 set showmatch           " highlight matching [{()}]
-" set hlsearch
 
 set ignorecase					" case-insensitive search, except when using capital letters
 set smartcase
@@ -102,9 +91,6 @@ au FileType go set tabstop=4 | set softtabstop=4 | set shiftwidth=4
 " custom mappings ------------------------------------------------------------
 
 let mapleader = "\<space>"
-
-" reload .config/nvim/init.vim
-" nnoremap <leader>r :source $HOME/.config/nvim/init.vim<CR>
 
 nnoremap j gj
 nnoremap k gk
@@ -132,14 +118,6 @@ map <c-f> :CtrlPBuffer<cr>
 vmap <leader>k gc
 nmap <leader>k gcc
 
-" remap vim-sneak
-" map f <Plug>Sneak_s
-" map F <Plug>Sneak_S
-" map <c-s> <Plug>Sneak_s
-" map <c-e> <Plug>Sneak_S
-" map <c-s> <Plug>Sneak_;
-" map <c-e> <Plug>Sneak_,
-
 " ctrlsf
 nmap     <leader>f <Plug>CtrlSFPrompt
 vmap     <leader>f <Plug>CtrlSFVwordPath
@@ -156,21 +134,15 @@ xmap ia <Plug>SidewaysArgumentTextobjI
 " vim-wordmotion
 let g:wordmotion_prefix = '<leader>'
 
-" fixes displeasing indentation behavior when leaving an empty indented line
-" inoremap <CR> <CR>x<BS>
-" nnoremap o ox<BS>
-" nnoremap O Ox<BS>
-
 " vim-easy-align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 nmap <silent> <BS> :nohlsearch<CR>
-" nmap <silent> <BS> :let @/=""<return>
 
 " same screen buffer focus
-" nnoremap <c-j> <C-W>j
-" nnoremap <c-k> <C-W>k
+nnoremap <a-j> <C-W>j
+nnoremap <a-k> <C-W>k
 nnoremap <a-h> <C-W>h
 nnoremap <a-l> <C-W>l
 
@@ -183,7 +155,6 @@ nnoremap <Leader>8 :set expandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
 nmap <leader>p :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 nmap <leader>y :.w !pbcopy<CR><CR>
 vmap <leader>y :w !pbcopy<CR><CR>
-" imap <leader>p <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 
 " spell mode
 map <F12> :set spell!<Bar>set spell?<CR>
@@ -191,30 +162,7 @@ map <F12> :set spell!<Bar>set spell?<CR>
 " buffer delete
 nnoremap <c-q> :bp\|bd #<CR>
 
-" delete to black hole buffer and paste
-nmap <leader>r "_dwP
-
-" vim-session
-" nnoremap <leader>s :SaveSession
-" nnoremap <leader>o :OpenSession
-
-" nerdtree toggle
-" nnoremap <leader>d :NERDTreeToggle<CR>
-
-" neovim terminal escape
-" tnoremap \<Esc> <C-\><C-n>
-
-" terminal buffer movement
-" tnoremap <c-W>j <C-\><C-n><C-W>j
-" tnoremap <c-W>k <C-\><C-n><C-W>k
-" tnoremap <c-W>h <C-\><C-n><C-W>h
-" tnoremap <c-W>l <C-\><C-n><C-W>l
-
-" terminal buffer navigation
-" tnoremap <c-b> <C-\><C-n>:bprevious<CR>
-" tnoremap <c-n> <C-\><C-n>:bnext<CR>
-" tnoremap <c-q> <C-\><C-n>:bd<CR>
-
+" TODO add this for other languages
 " take word under cursor and console.log in next line
 nmap <Leader>cl yiwoconsole.log('<c-r>"', <c-r>");<Esc>^
 vmap <Leader>cl yoconsole.log('<c-r>"', <c-r>");<Esc>^
@@ -244,13 +192,10 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 0
 let g:deoplete#source#attribute#min_pattern_length = 1
-
 " use tab completion
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 " disable preview
 set completeopt-=preview
-
 " use deoplete for ternjs
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'
@@ -273,13 +218,6 @@ augroup my_neomake_signs
 			\ hi NeomakeWarningSign ctermfg=yellow
 augroup END
 
-" ---- vim-session ----
-" let g:session_autosave = 'no'
-" let g:session_autoload = 'no'
-
-" ---- nerdtree ----
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 " ---- ctrlsf ----
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_ignore_dir = ['./tags']
@@ -290,40 +228,6 @@ let g:clever_f_across_no_line = 1
 let g:clever_f_repeat_last_char_inputs = ["\<CR>"]
 let g:clever_f_fix_key_direction = 1
 nmap <Esc> <Plug>(clever-f-reset)
-
-" ---- hardtime ----
-" let g:hardtime_default_on = 1
-" let g:hardtime_maxcount = 2
-
-" ---- gutentags ----
-" let g:gutentags_cache_dir = '~/.cache/ctags'
-
-" ---- vim-sneak ----
-" let g:sneak#use_ic_scs = 1
-" let g:sneak#s_next = 1
-
-" ---- sparkup ----
-" autocmd FileType javascript,jsx,ejs runtime! ftplugin/html/sparkup.vim
-
-" ---- indentline ----
-" let g:indentLine_setColors = 0
-
-" ---- vim-move ----
-" let g:move_key_modifier = 'C'
-
-" ---- matchtag ----
-" autocmd FileType javascript,jsx runtime! ftplugin/html.vim
-
-" ---- semantic highlighting ----
-" let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
-
-" ---- highlight cursor words ---
-" let g:HiCursorWords_style='term=reverse,underlined cterm=reverse gui=reverse'
-
-" neovim terminal emulator configurations ------------------------------------
-
-autocmd BufWinEnter,WinEnter term://* startinsert
-autocmd BufLeave term://* stopinsert
 
 " themes and customization ---------------------------------------------------
 
