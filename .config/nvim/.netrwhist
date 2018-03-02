@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/edys/parcheesijs'
-let g:netrw_dirhist_2='/Users/edys/parcheesijs/.git'
-let g:netrw_dirhist_3='/Users/edys/programming/nndp/mysrc'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/edys/code/JavaScript30'
+let g:netrw_dirhist_2='/Users/edys/code'
+let g:netrw_dirhist_3='/Users/edys/code/algorithms/hackerrank'
+let g:netrw_dirhist_4='/Users/edys/code/algorithms'
+let g:netrw_dirhist_5='/Users/edys/code/os-tutorial/01-bootsector-barebones'

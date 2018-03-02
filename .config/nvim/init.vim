@@ -19,15 +19,20 @@ call dein#add('airblade/vim-gitgutter')
 call dein#add('chaoren/vim-wordmotion')
 call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('dyng/ctrlsf.vim')
-call dein#add('justinmk/vim-sneak')
-call dein#add('matze/vim-move')
+" call dein#add('justinmk/vim-sneak')
+call dein#add('gregsexton/matchtag')
+call dein#add('junegunn/vim-easy-align')
+" call dein#add('matze/vim-move')
 call dein#add('neomake/neomake')
+call dein#add('rhysd/clever-f.vim')
 call dein#add('raimondi/delimitmate')
 call dein#add('shougo/deoplete.nvim')
+call dein#add('shougo/echodoc.vim')
 call dein#add('tpope/vim-commentary')
 call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-repeat')
 call dein#add('tpope/vim-surround')
-call dein#add('gregsexton/matchtag')
+call dein#add('unblevable/quick-scope')
 call dein#add('xolox/vim-misc')
 " call dein#add('rstacruz/sparkup')
 " call dein#add('xolox/vim-session')
@@ -39,14 +44,15 @@ call dein#add('xolox/vim-misc')
 call dein#add('freeo/vim-kalisi')
 call dein#add('rakr/vim-one')
 call dein#add('morhetz/gruvbox')
+call dein#add('icymind/neosolarized')
 call dein#add('chriskempson/base16-vim')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
-call dein#add('jaxbot/semantic-highlight.vim')
+" call dein#add('jaxbot/semantic-highlight.vim')
 
 " language specific plugins
 call dein#add('pangloss/vim-javascript')
-call dein#add('carlitux/deoplete-ternjs', {'build': 'npm install'})
+call dein#add('carlitux/deoplete-ternjs', {'build': 'npm install -g tern'})
 call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
 call dein#add('mxw/vim-jsx')
 call dein#add('octol/vim-cpp-enhanced-highlight')
@@ -81,6 +87,9 @@ set confirm
 set hidden
 set title
 
+set nowrap
+set sidescroll=1
+
 set mouse=a
 
 au FileType javascript set tabstop=2 | set softtabstop=2 | set shiftwidth=2
@@ -104,10 +113,12 @@ nnoremap k gk
 nnoremap K kJ
 
 " scroll three lines with ctrl-e and ctrl-y
-" nnoremap <c-e> 4<c-e>
-" nnoremap <c-y> 4<c-y>
 nnoremap <c-j> 3<c-e>
 nnoremap <c-k> 3<c-y>
+
+" horizontal scrolling
+nnoremap <c-h> 3zh
+nnoremap <c-l> 3zl
 
 " Do not loose the current selection when shift indentation
 vnoremap > >gv
@@ -122,8 +133,12 @@ vmap <leader>k gc
 nmap <leader>k gcc
 
 " remap vim-sneak
-map <c-s> <Plug>Sneak_s
-map <c-e> <Plug>Sneak_S
+" map f <Plug>Sneak_s
+" map F <Plug>Sneak_S
+" map <c-s> <Plug>Sneak_s
+" map <c-e> <Plug>Sneak_S
+" map <c-s> <Plug>Sneak_;
+" map <c-e> <Plug>Sneak_,
 
 " ctrlsf
 nmap     <leader>f <Plug>CtrlSFPrompt
@@ -146,14 +161,18 @@ let g:wordmotion_prefix = '<leader>'
 " nnoremap o ox<BS>
 " nnoremap O Ox<BS>
 
+" vim-easy-align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 nmap <silent> <BS> :nohlsearch<CR>
 " nmap <silent> <BS> :let @/=""<return>
 
 " same screen buffer focus
 " nnoremap <c-j> <C-W>j
 " nnoremap <c-k> <C-W>k
-nnoremap <c-h> <C-W>h
-nnoremap <c-l> <C-W>l
+nnoremap <a-h> <C-W>h
+nnoremap <a-l> <C-W>l
 
 " map different tab widths to leader
 nnoremap <Leader>2 :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
@@ -262,12 +281,15 @@ augroup END
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " ---- ctrlsf ----
-let g:sneak#use_ic_scs = 1
-let g:sneak#s_next = 1
-
-" ---- ctrlsf ----
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_ignore_dir = ['./tags']
+
+" ---- clever-f ----
+" let g:clever_f_smart_case = 1
+let g:clever_f_across_no_line = 1
+let g:clever_f_repeat_last_char_inputs = ["\<CR>"]
+let g:clever_f_fix_key_direction = 1
+nmap <Esc> <Plug>(clever-f-reset)
 
 " ---- hardtime ----
 " let g:hardtime_default_on = 1
@@ -276,11 +298,18 @@ let g:ctrlsf_ignore_dir = ['./tags']
 " ---- gutentags ----
 " let g:gutentags_cache_dir = '~/.cache/ctags'
 
+" ---- vim-sneak ----
+" let g:sneak#use_ic_scs = 1
+" let g:sneak#s_next = 1
+
 " ---- sparkup ----
 " autocmd FileType javascript,jsx,ejs runtime! ftplugin/html/sparkup.vim
 
 " ---- indentline ----
 " let g:indentLine_setColors = 0
+
+" ---- vim-move ----
+" let g:move_key_modifier = 'C'
 
 " ---- matchtag ----
 " autocmd FileType javascript,jsx runtime! ftplugin/html.vim
@@ -312,7 +341,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 set ttimeoutlen=0
 set noshowmode
-let g:airline_theme='one'
+" let g:airline_theme='one'
 
 " ---- colorscheme ----
 let g:one_allow_italics = 1

@@ -39,8 +39,9 @@ source ~/.fzf.bash
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 # racket export
-export PATH=$PATH:/Applications/Racket\ v6.10.0.3/bin
+# export PATH=$PATH:/Applications/Racket\ v6.10.0.3/bin
 
 # terminal input line
-export PS1=" \[\033[32m\]\u@\h\[\033[33m\] \[\033[36m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+export PS1=" \[\e[32m\]\u@\h \[\e[36m\]\w\[\e[33m\]\$(parse_git_branch) \[\e[00m\]$ "
+# export PS1=" \[\033[32m\]\u@\h\[\033[33m\] \[\033[36m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 # export PS1=" \[\033[34m\]\D{%D %r} \[\033[32m\]\u@\h\[\033[33m\] \[\033[36m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
