@@ -5,18 +5,18 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # aliases 
-alias ls='ls -hFG'
-alias l='ls'
-alias sl='ls'
-alias ll='ls -l'
-alias la='ls -A'
-alias lal='ls -Al'
-# alias C='clear'
+alias ls="ls -hFG"
+alias l="ls"
+alias sl="ls"
+alias ll="ls -l"
+alias la="ls -A"
+alias lal="ls -Al"
+# alias C="clear"
 
-alias bashrc='nvim ~/.bashrc'
-alias vimrc='vim ~/.vimrc'
-alias nvimit='nvim ~/.config/nvim/init.vim'
-alias nvinit='nvim ~/.config/nvim/init.vim'
+alias bashrc="nvim ~/.bashrc"
+alias vimrc="vim ~/.vimrc"
+alias nvimit="nvim ~/.config/nvim/init.vim"
+alias tmuxcf="nvim ~/.tmux.conf"
 
 # show all tab completion options, case-insensitive
 bind TAB:menu-complete

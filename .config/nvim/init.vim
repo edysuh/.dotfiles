@@ -17,15 +17,20 @@ call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 call dein#add('andrewradev/sideways.vim')
 call dein#add('airblade/vim-gitgutter')
 call dein#add('chaoren/vim-wordmotion')
+call dein#add('christoomey/vim-tmux-navigator')
 call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('dyng/ctrlsf.vim')
 call dein#add('gregsexton/matchtag')
 call dein#add('junegunn/vim-easy-align')
+call dein#add('junegunn/vim-peekaboo')
 call dein#add('neomake/neomake')
-call dein#add('rhysd/clever-f.vim')
 call dein#add('raimondi/delimitmate')
+call dein#add('reedes/vim-pencil')
+call dein#add('rhysd/clever-f.vim')
 call dein#add('shougo/deoplete.nvim')
 call dein#add('shougo/echodoc.vim')
+call dein#add('simnalamburt/vim-mundo')
+call dein#add('sjl/vim-sparkup')
 call dein#add('tpope/vim-commentary')
 call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-repeat')
@@ -33,6 +38,9 @@ call dein#add('tpope/vim-surround')
 call dein#add('unblevable/quick-scope')
 call dein#add('vim-airline/vim-airline')
 call dein#add('xolox/vim-misc')
+" call dein#add('ludovicchabant/vim-gutentags')
+" call dein#add('mattn/emmet-vim')
+" call dein#add('majutsushi/tagbar')
 
 " themes
 call dein#add('freeo/vim-kalisi')
@@ -41,13 +49,14 @@ call dein#add('icymind/neosolarized')
 call dein#add('vim-airline/vim-airline-themes')
 
 " language specific plugins
-call dein#add('pangloss/vim-javascript')
 call dein#add('carlitux/deoplete-ternjs', {'build': 'npm install -g tern'})
-call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
+call dein#add('herringtondarkholme/yats.vim')
+call dein#add('pangloss/vim-javascript')
+call dein#add('mhartington/nvim-typescript')
 call dein#add('mxw/vim-jsx')
 call dein#add('octol/vim-cpp-enhanced-highlight')
-call dein#add('herringtondarkholme/yats.vim')
-call dein#add('mhartington/nvim-typescript')
+call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
+call dein#add('vim-ruby/vim-ruby')
 
 call dein#end()
 call dein#save_state()
@@ -90,7 +99,7 @@ au FileType go set tabstop=4 | set softtabstop=4 | set shiftwidth=4
 
 " custom mappings ------------------------------------------------------------
 
-let mapleader = "\<space>"
+let mapleader = ";"
 
 nnoremap j gj
 nnoremap k gk
@@ -124,8 +133,8 @@ vmap     <leader>f <Plug>CtrlSFVwordPath
 nmap     <leader>F <Plug>CtrlSFCwordPath
 
 " sideways.vim
-nnoremap <c-a>h :SidewaysLeft<cr>
-nnoremap <c-a>l :SidewaysRight<cr>
+nnoremap <leader>ah :SidewaysLeft<cr>
+nnoremap <leader>al :SidewaysRight<cr>
 omap aa <Plug>SidewaysArgumentTextobjA
 xmap aa <Plug>SidewaysArgumentTextobjA
 omap ia <Plug>SidewaysArgumentTextobjI
@@ -140,11 +149,23 @@ nmap ga <Plug>(EasyAlign)
 
 nmap <silent> <BS> :nohlsearch<CR>
 
+" pencil
+nnoremap <leader>q :PencilToggle<CR>
+
 " same screen buffer focus
-nnoremap <a-j> <C-W>j
-nnoremap <a-k> <C-W>k
-nnoremap <a-h> <C-W>h
-nnoremap <a-l> <C-W>l
+" nnoremap <a-j> <C-W>j
+" nnoremap <a-k> <C-W>k
+" nnoremap <a-h> <C-W>h
+" nnoremap <a-l> <C-W>l
+
+" tmux mappings
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
+
 
 " map different tab widths to leader
 nnoremap <Leader>2 :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
@@ -178,15 +199,26 @@ map <leader>h :call TrimWhiteSpace()<CR>
 
 " plugin configurations ------------------------------------------------------
 
-" ---- delimitMate ----
-let delimitMate_expand_cr = 1
-let delimitMate_excluded_regions = ''
+" ---- clever-f ----
+" let g:clever_f_smart_case = 1
+let g:clever_f_across_no_line = 1
+let g:clever_f_repeat_last_char_inputs = ["\<CR>"]
+let g:clever_f_fix_key_direction = 1
+nmap <Esc> <Plug>(clever-f-reset)
 
 " ---- ctrlp ----
 let g:ctrlp_open_multiple_files = 'ij'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_prompt_mappings = { 'PrtClearCache()': ['<c-c>'] }
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" ---- ctrlsf ----
+let g:ctrlsf_position = 'bottom'
+let g:ctrlsf_ignore_dir = ['./tags']
+
+" ---- delimitMate ----
+let delimitMate_expand_cr = 1
+let delimitMate_excluded_regions = ''
 
 " ---- deoplete ----
 let g:deoplete#enable_at_startup = 1
@@ -200,12 +232,15 @@ set completeopt-=preview
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'
 
+" ---- gutentags ----
+let g:gutentags_cache_dir = "~/.local/share/nvim/tags"
+
 " ---- neomake ----
 autocmd! BufWritePost,BufEnter * Neomake						" run neomake on every write
 autocmd! VimLeave * let g:neomake_verbose = 0				" no exit code on close
 let g:neomake_highlight_columns = 0
 let g:neomake_tempfile_enabled = 1
-let g:neomake_javascript_enabled_makers = ['jshint']
+let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_python_enabled_makers = ['flake8']
 let g:neomake_html_enabled_makers = []
 let g:neomake_python_flake8_make = {
@@ -217,17 +252,6 @@ augroup my_neomake_signs
 			\ hi NeomakeErrorSign ctermfg=white |
 			\ hi NeomakeWarningSign ctermfg=yellow
 augroup END
-
-" ---- ctrlsf ----
-let g:ctrlsf_position = 'bottom'
-let g:ctrlsf_ignore_dir = ['./tags']
-
-" ---- clever-f ----
-" let g:clever_f_smart_case = 1
-let g:clever_f_across_no_line = 1
-let g:clever_f_repeat_last_char_inputs = ["\<CR>"]
-let g:clever_f_fix_key_direction = 1
-nmap <Esc> <Plug>(clever-f-reset)
 
 " themes and customization ---------------------------------------------------
 
@@ -257,5 +281,7 @@ highlight Comment gui=italic
 
 " neovim terminal cursor color
 highlight TermCursor ctermfg=red guifg=red
+
+" set fillchars=vert:|
 
 " end of nvim config file ----------------------------------------------------
