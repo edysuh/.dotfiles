@@ -20,3 +20,4 @@ bind "set completion-ignore-case on"
 PATH=$PATH:$HOME/bin
 
 export PATH
+export PATH="/usr/local/opt/node@8/bin:$PATH"

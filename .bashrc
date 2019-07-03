@@ -38,6 +38,14 @@ source ~/.fzf.bash
 # go export
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
+# sleep timer
+function sleepy() {
+  local minutes=$1
+  local datetime=`date -v+${minutes}M +"%m/%d/%y %H:%M:%S"`
+  sudo pmset schedule sleep "$datetime"
+	pmset -g sched
+}
+
 # racket export
 # export PATH=$PATH:/Applications/Racket\ v6.10.0.3/bin
 

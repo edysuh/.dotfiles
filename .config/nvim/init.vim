@@ -17,7 +17,6 @@ call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 call dein#add('andrewradev/sideways.vim')
 call dein#add('airblade/vim-gitgutter')
 call dein#add('chaoren/vim-wordmotion')
-call dein#add('christoomey/vim-tmux-navigator')
 call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('dyng/ctrlsf.vim')
 call dein#add('gregsexton/matchtag')
@@ -30,7 +29,7 @@ call dein#add('rhysd/clever-f.vim')
 call dein#add('shougo/deoplete.nvim')
 call dein#add('shougo/echodoc.vim')
 call dein#add('simnalamburt/vim-mundo')
-call dein#add('sjl/vim-sparkup')
+" call dein#add('sjl/vim-sparkup')
 call dein#add('tpope/vim-commentary')
 call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-repeat')
@@ -41,6 +40,7 @@ call dein#add('xolox/vim-misc')
 " call dein#add('ludovicchabant/vim-gutentags')
 " call dein#add('mattn/emmet-vim')
 " call dein#add('majutsushi/tagbar')
+" call dein#add('christoomey/vim-tmux-navigator')
 
 " themes
 call dein#add('freeo/vim-kalisi')
@@ -52,11 +52,12 @@ call dein#add('vim-airline/vim-airline-themes')
 call dein#add('carlitux/deoplete-ternjs', {'build': 'npm install -g tern'})
 call dein#add('herringtondarkholme/yats.vim')
 call dein#add('pangloss/vim-javascript')
-call dein#add('mhartington/nvim-typescript')
+call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 call dein#add('mxw/vim-jsx')
 call dein#add('octol/vim-cpp-enhanced-highlight')
 call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
 call dein#add('vim-ruby/vim-ruby')
+call dein#add('omnisharp/omnisharp-vim')
 
 call dein#end()
 call dein#save_state()
@@ -89,6 +90,7 @@ set nowrap
 set sidescroll=1
 
 set mouse=a
+" set inccommand=nosplit
 
 au FileType javascript set tabstop=2 | set softtabstop=2 | set shiftwidth=2
 au FileType python set tabstop=4 | set softtabstop=4 | set shiftwidth=4
@@ -108,20 +110,20 @@ nnoremap k gk
 nnoremap K kJ
 
 " scroll three lines with ctrl-e and ctrl-y
-nnoremap <c-j> 3<c-e>
-nnoremap <c-k> 3<c-y>
+nnoremap <c-e> 3<c-e>
+nnoremap <c-y> 3<c-y>
 
 " horizontal scrolling
-nnoremap <c-h> 3zh
-nnoremap <c-l> 3zl
+nnoremap <a-h> 3zh
+nnoremap <a-l> 3zl
 
 " Do not loose the current selection when shift indentation
 vnoremap > >gv
 vnoremap <lt> <lt>gv
 
 " remap ctrlp re-cache and buffer search
-map <c-c> :CtrlPClearCache<cr>
-map <c-f> :CtrlPBuffer<cr>
+nnoremap <c-c> :CtrlPClearCache<cr>
+nnoremap <c-f> :CtrlPBuffer<cr>
 
 " remap commentary
 vmap <leader>k gc
@@ -153,19 +155,24 @@ nmap <silent> <BS> :nohlsearch<CR>
 nnoremap <leader>q :PencilToggle<CR>
 
 " same screen buffer focus
-" nnoremap <a-j> <C-W>j
-" nnoremap <a-k> <C-W>k
-" nnoremap <a-h> <C-W>h
-" nnoremap <a-l> <C-W>l
+nnoremap <c-j> <C-W>j
+nnoremap <c-k> <C-W>k
+nnoremap <c-h> <C-W>h
+nnoremap <c-l> <C-W>l
+
+" window resize
+nnoremap <silent> = <c-w>3+
+nnoremap <silent> - <c-w>3-
+nnoremap <silent> _ <c-w>3<
+nnoremap <silent> + <c-w>3>
 
 " tmux mappings
-let g:tmux_navigator_no_mappings = 1
+" let g:tmux_navigator_no_mappings = 1
 
-nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
-
+" nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
+" nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
+" nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 
 " map different tab widths to leader
 nnoremap <Leader>2 :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
@@ -187,6 +194,27 @@ nnoremap <c-q> :bp\|bd #<CR>
 " take word under cursor and console.log in next line
 nmap <Leader>cl yiwoconsole.log('<c-r>"', <c-r>");<Esc>^
 vmap <Leader>cl yoconsole.log('<c-r>"', <c-r>");<Esc>^
+
+" terminal configurations ----------------------------------------------------
+
+tnoremap <c-a><Esc> <C-\><C-n>
+
+tnoremap <c-a>v <C-\><C-n>:vsp<CR><C-w><C-w>:term<CR>
+tnoremap <c-a>s <C-\><C-n>:sp<CR><C-w><C-w>:term<CR>
+noremap <c-a>v :vsp<CR><C-w><C-w>:term<CR>
+noremap <c-a>s :sp<CR><C-w><C-w>:term<CR>
+
+tnoremap <c-h> <C-\><C-n><c-w>h
+tnoremap <c-l> <C-\><C-n><c-w>l
+tnoremap <c-j> <C-\><C-n><c-w>j
+tnoremap <c-k> <C-\><C-n><c-w>k
+
+tnoremap :q <c-\><c-n>:q
+
+tnoremap <c-p> <c-\><c-n>:CtrlP<cr>
+tnoremap <c-f> <c-\><c-n>:CtrlPBuffer<cr>
+
+autocmd BufWinEnter,WinEnter term://* startinsert
 
 " custom functions -----------------------------------------------------------
 " Removes trailing spaces
